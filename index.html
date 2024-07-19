@@ -39,16 +39,14 @@
 
 				<!-- Nav -->
 					<nav id="nav">
-                    <form>
-                      
+
+
                         <ul class="links">
                       
                         <li class="active"><a href="#main">Information</a></li>
                  
                         
                         </ul>
-
-                    </form>
 					</nav>
                     
 				<!-- Main -->
@@ -56,7 +54,7 @@
                         <section class="post">
                             <header class="major">
                                 <span class="date">September 15, 2024</span>
-                                <h1>Congratulations!</h1>
+                                <h1></h1>
                           
                             </header>
                             <div class="image main"><img src="images/1.png" style="border:3px solid #282828; padding:1px; margin:2px" alt="" /></div>
@@ -71,8 +69,10 @@
 								<article>
 									<header>
 										
-										<h2 style="text-align: left;"><span  class="date">When : <b>September 15, 2024</b></span></h2>
-                                        <h2 style="text-align: left;" ><span class="date">Where : <b>@ Cathedral Dipolog City</b></span></h2>
+										<h2 style="text-align: left;"><b>When </b>: September 18, 2024 @2pm</h2>
+                                        <h2 style="text-align: left;"><b>Where </b> : Cathedral Church, Dipolog City</h2>
+                                        <h2 style="text-align: left;">Reception : Ariana Hotel, Dipolog City</h2>
+									</header>
 									</header>
 
 									
@@ -92,21 +92,33 @@
 				<!-- Footer -->
 					<footer id="footer">
 						<section>
-							<form method="post" action="#">
+                            
+							<form>
 								<div class="fields">
 									<div class="field">
 										<label for="name">Name: *</label>
-										<input type="text" required name="name" id="name" placeholder="Please enter your name here.." maxlength="100"/>
-									</div>
-									<div class="field">
-										<label for="message">Message</label>
-										<textarea name="message" id="message" rows="3" placeholder="if any " maxlength="100"></textarea>
-									</div>
+										<input type="text" name="name" required  id="name" placeholder="Please enter your name here.." maxlength="100"/>
+                                        <input type="hidden"  name="date" id="date" readonly/>
+                                        
+                                    </div>
+                                     <div class="field">
+										<label for="status">Attending?</label>
+										<select name="status" id="status">
+                                            <option selected value="yes">Yes</option>
+                                            <option value="no">No</option>
+                                        </select>
+									</div> 
+                                    <div class="field">
+                                        <label for="remarks">Remarks:</label>
+                                        <textarea name="remarks" id="remarks" rows="3" placeholder="if any " maxlength="500"> </textarea>
+                                    </div>
+								
 								</div>
 								<ul class="actions">
-									<li><input type="submit" value="Register" /></li>
+									<li><input type="submit" value="test" id="sub" /></li>
 								</ul>
 							</form>
+                            <h3 id="msg"></h3>
 						</section>
                 
 						<section id="register" class="split contact">
@@ -121,12 +133,13 @@
 					</footer>
 
 				<!-- Copyright -->
-					<div id="copyright">
-						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
-					</div>
+					<!-- <div id="copyright">
+						<ul><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div> -->
+             
 
 			</div>
-
+        
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
@@ -138,3 +151,47 @@
 
 	</body>
 </html>
+<script type="text/javaScript">
+    let form = document.querySelector("form");
+    form.addEventListener('submit',(e) =>{
+        e.preventDefault();
+        let data = new FormData(form);
+        let msgs = document.querySelector('#msg');
+        document.querySelector("#sub").value = "Submitting......";
+        fetch('https://script.google.com/macros/s/AKfycbzcbR6CUIaLWuqCqO1FmuyFGWwaL9BckwoZF4uPemYDtnMJdLtK6F7TWP-kv9CcI9vSiQ/exec',
+        { method: "POST",
+          body : data  
+        })
+        .then(res => res.text() )
+        .then(data => {
+            if(data == "Success"){
+                msgs.innerHTML ="Successfully Registered";
+                msgs.style.color  = 'green';
+              
+            }else{
+                msgs.innerHTML ="Your name is alreay registered. See you!";
+                msgs.style.color  = 'black';
+            }
+            document.querySelector("#sub").value = "Submit";
+            console.log(data)  
+              
+        });
+    })
+
+    function updateDateTime() {
+        const currentDateTimeElement = document.getElementById("date");
+        const currentDate = new Date();
+
+        const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+        const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        const formattedDate = currentDate.toLocaleDateString(undefined, dateOptions);
+        const formattedTime = currentDate.toLocaleTimeString(undefined, timeOptions);
+
+        currentDateTimeElement.value = `${formattedDate} ${formattedTime}`;
+    }
+
+    updateDateTime(); // Initial call to display the current date and time
+
+    setInterval(updateDateTime, 1000); // Update the date and time every second
+  
+</script>
