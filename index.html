@@ -11,34 +11,42 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-     
+	
 	</head>
 	<body class="is-preload">
 
 		<!-- Wrapper -->
 			<div id="wrapper" class="fade-in">
-
+				
 				<!-- Intro -->
 					<div id="intro">
-						<h1>You are invited to<br />
+						<h1 >You are invited to<br />
                         our Wedding!</h1>
 						<p>Register below</p>
 						<ul class="actions">
-							<li><a href="#register"   class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
-						</ul>
-					</div>
+							<li><a href="#register"  class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
 
+						</ul>
+						<div class="audio-control">
+							<audio controls id="myAudio" >
+								<source src="images/Kina Grannis ft. Imaginary Future - I Will Spend My Whole Life Loving You (lyrics).mp3" type="audio/mpeg">
+								Your browser does not support the audio element.
+							</audio>
+						 </div>
+					</div>
+					
 				<!-- Header -->
 		
 
 				<!-- Nav -->
+				
 					<nav id="nav">
 
-
+						
                         <ul class="links">
-                      
-                        	<li><a href="#main" id="playButton">Information</a></li>
-                 
+							
+                        	<li style="text-align: left;"><a href="#main" id="playButton">Information</a></li>
+						
                         
                         </ul>
 					</nav>
@@ -123,10 +131,7 @@
 						<ul><a href="https://html5up.net">HTML5 UP</a></li></ul>
 					</div>
 				
-					<audio controls id="myAudio" >
-						<source src="images/Kina Grannis ft. Imaginary Future - I Will Spend My Whole Life Loving You (lyrics).mp3" type="audio/mpeg">
-						Your browser does not support the audio element.
-					</audio>	
+					
 			</div>
         
 		<!-- Scripts -->
@@ -197,4 +202,5 @@
               
             });
         });
+	document.getElementById('playButton').click();
 </script>
