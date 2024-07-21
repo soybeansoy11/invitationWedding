@@ -1,1 +1,183 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Wedding Invitation</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+     
+	</head>
+	<body class="is-preload">
 
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+
+				<!-- Intro -->
+					<div id="intro">
+						<h1>You are invited to<br />
+                        our Wedding!</h1>
+						<p>Register below</p>
+						<ul class="actions">
+							<li><a href="#register" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+						</ul>
+					</div>
+
+				<!-- Header -->
+		
+
+				<!-- Nav -->
+					<nav id="nav">
+
+
+                        <ul class="links">
+                      
+                        	<li><a href="#main">Information</a></li>
+                 
+                        
+                        </ul>
+					</nav>
+                    
+				<!-- Main -->
+					<div id="main">
+                        <section class="post">
+                            <header class="major" style="height: 140px; ">
+								<span class="date"><img src="images/BANNER.png" style=" width: 250px; height: 200px;"  alt="" /></span>
+                            </header>
+                            <div class="image main"><img src="images/1st Page.png" style="border:3px solid #282828; padding:1px; margin:2px" alt="" /></div>
+                           
+                            <div class="image main"><img src="images/2nd page.png" alt="" style="border:3px solid #282828; padding:1px; margin:2px"/></div>
+                            <div class="image main"><img src="images/3rd page.png" alt="" style="border:3px solid #282828; padding:1px; margin:2px"/></div>
+                        </section>
+					
+
+						<!-- Posts -->
+							<section class="posts" style="height: 650px;">
+								<article>
+									<header>
+										<div class="image main"><img src="images/our Story.png" alt="" style="text-align: center;padding-top: 50px;"/></div>
+									</header>
+								</article>
+                                <article >
+									<header>
+										<div class="image main"><img src="images/kopi kopi.png" alt="" style="text-align: center; "/></div>
+									</header>
+									
+								</article>
+							
+							</section>
+							
+
+						
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section>
+                            
+							<form>
+								<div class="fields">
+									<div class="field">
+										<label for="name">Name: *</label>
+										<input type="text" name="name" required  id="name" placeholder="Please enter your name here.." maxlength="100"/>
+                                        <input type="hidden"  name="date" id="date" readonly/>
+                                        
+                                    </div>
+                                     <div class="field">
+										<label for="status">Attending?</label>
+										<select name="status" id="status">
+                                            <option selected value="yes">Yes</option>
+                                            <option value="no">No</option>
+                                        </select>
+									</div> 
+                                    <div class="field">
+                                        <label for="remarks">Message:</label>
+                                        <textarea name="remarks" id="remarks" rows="3" placeholder="if any " maxlength="500"> </textarea>
+                                    </div>
+								
+								</div>
+								<ul class="actions">
+									<li><input type="submit" value="Submit" id="sub" /></li>
+								</ul>
+							</form>
+                            <h3 id="msg"></h3>
+						</section>
+                
+						<section id="register" class="split contact">
+							<section class="alt">
+								<div class="image main"><img src="images/last pic.jpg" alt="" style="text-align: center; padding-top: 50px;"/>
+									
+								</section>
+                        
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<!-- <div id="copyright">
+						<ul><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div> -->
+             
+
+			</div>
+        
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
+<script type="text/javaScript">
+    let form = document.querySelector("form");
+    form.addEventListener('submit',(e) =>{
+        e.preventDefault();
+        let data = new FormData(form);
+        let msgs = document.querySelector('#msg');
+        document.querySelector("#sub").value = "Submitting......";
+        fetch('https://script.google.com/macros/s/AKfycbzcbR6CUIaLWuqCqO1FmuyFGWwaL9BckwoZF4uPemYDtnMJdLtK6F7TWP-kv9CcI9vSiQ/exec',
+        { method: "POST",
+          body : data  
+        })
+        .then(res => res.text() )
+        .then(data => {
+            if(data == "Success"){
+                msgs.innerHTML ="Successfully Registered";
+                msgs.style.color  = 'green';
+              
+            }else{
+                msgs.innerHTML ="Your name is alreay registered. See you!";
+                msgs.style.color  = 'black';
+            }
+            document.querySelector("#sub").value = "Submit";
+            console.log(data)  
+              
+        });
+    })
+
+    function updateDateTime() {
+        const currentDateTimeElement = document.getElementById("date");
+        const currentDate = new Date();
+
+        const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+        const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        const formattedDate = currentDate.toLocaleDateString(undefined, dateOptions);
+        const formattedTime = currentDate.toLocaleTimeString(undefined, timeOptions);
+
+        currentDateTimeElement.value = `${formattedDate} ${formattedTime}`;
+    }
+
+    updateDateTime(); // Initial call to display the current date and time
+
+    setInterval(updateDateTime, 1000); // Update the date and time every second
+  
+</script>
