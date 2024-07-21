@@ -24,7 +24,7 @@
                         our Wedding!</h1>
 						<p>Register below</p>
 						<ul class="actions">
-							<li><a href="#register" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+							<li><a href="#register"  id="playButton" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
 						</ul>
 					</div>
 
@@ -60,7 +60,7 @@
 							<section class="post">
 								<article>
 									<header>
-										<div class="image main"><img src="images/our Story.png" alt="" style="text-align: center;padding-top: 50px;"/></div>
+										<div class="image main"><img src="images/our Story.png" alt="" style="border:1px solid #282828;text-align: center;padding-top: 50px;"/></div>
 									</header>
 								</article>
                                 <article >
@@ -80,7 +80,7 @@
 				<!-- Footer -->
 					<footer id="footer">
 						<section>
-                            
+						
 							<form>
 								<div class="fields">
 									<div class="field">
@@ -119,11 +119,14 @@
 					</footer>
 
 				<!-- Copyright -->
-					<!-- <div id="copyright">
-						<ul><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
-					</div> -->
-             
-
+					<div id="copyright">
+						<ul><a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+				
+					<audio controls id="myAudio" >
+						<source src="images/Kina Grannis ft. Imaginary Future - I Will Spend My Whole Life Loving You (lyrics).mp3" type="audio/mpeg">
+						Your browser does not support the audio element.
+					</audio>	
 			</div>
         
 		<!-- Scripts -->
@@ -134,7 +137,8 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
+			
+			
 	</body>
 </html>
 <script type="text/javaScript">
@@ -179,5 +183,18 @@
     updateDateTime(); // Initial call to display the current date and time
 
     setInterval(updateDateTime, 1000); // Update the date and time every second
-  
+	
+	document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('playButton').addEventListener('click', () => {
+               
+				var audio = document.getElementById('myAudio');
+				audio.play().then(() => {
+					console.log("Audio is playing.");
+				}).catch(error => {
+					console.error('Error trying to play audio:', error);
+					alert('Playback failed. Please ensure your browser allows audio playback.');
+				});
+              
+            });
+        });
 </script>
